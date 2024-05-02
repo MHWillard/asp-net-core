@@ -14,9 +14,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Work\\Coding\\asp-net-core\\Chapter5\\WebApplication1.csproj",
-      "projectName": "WebApplication1",
-      "projectPath": "C:\\Work\\Coding\\asp-net-core\\Chapter5\\WebApplication1.csproj",
+      "projectUniqueName": "C:\\Work\\Coding\\asp-net-core\\Chapter5\\Chapter5.csproj",
+      "projectName": "Chapter5",
+      "projectPath": "C:\\Work\\Coding\\asp-net-core\\Chapter5\\Chapter5.csproj",
       "packagesPath": "C:\\Users\\mwillard\\.nuget\\packages\\",
       "outputPath": "C:\\Work\\Coding\\asp-net-core\\Chapter5\\obj\\",
       "projectStyle": "PackageReference",

@@ -7,17 +7,27 @@ namespace WebApplication1
 {
     public class Program
     {
-        public record Person(string FirstName, string LastName) { }
+        void DeleteFruit(string id)
+        {
+            Fruit.All.Remove(id);
+        }
+        record Fruit(string Name, int Stock)
+        {
+            public static readonly Dictionary<string, Fruit> All = new();
+        };
+        class Handlers
+        {
+            public void ReplaceFruit(string id, Fruit fruit)
+            {
+                Fruit.All[id] = fruit;
+            }
+            public static void AddFruit(string id, Fruit fruit)
+            {
+                Fruit.All.Add(id, fruit);
+            }
+        }
         public static void Main(string[] args)
         {
-            //Add data to pull from an endpoint.
-            var people = new List<Person> {
-new("Tom", "Hanks"),
-new("Denzel", "Washington"),
-new("Leondardo", "DiCaprio"),
-new("Al", "Pacino"),
-new("Morgan", "Freeman"),
-            };
 
             //1.Create a WebApplicationBuilder instance.
             WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -41,7 +51,14 @@ new("Morgan", "Freeman"),
             app.UseRouting();
 
             //5. Map the endpoints in your application.
-            app.MapGet("/person/{name}", (string name) => people.Where(p => p.FirstName.StartsWith(name)));
+            var getFruit = (string id) => Fruit.All[id];
+            Handlers handlers = new();
+
+            app.MapGet("/fruit", () => Fruit.All);
+            app.MapGet("/fruit/{id}", getFruit);
+            app.MapPost("/fruit/{id}", Handlers.AddFruit);
+            app.MapPut("/fruit/{id}", handlers.ReplaceFruit);
+            app.MapDelete("/fruit/{id}", DeleteFruit);
 
             //6. Call Run() on the WebApplication to start the server and handle requests.
             app.Run();
